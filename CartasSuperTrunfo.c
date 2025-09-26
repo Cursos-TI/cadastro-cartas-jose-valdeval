@@ -15,8 +15,10 @@ int main(){
     char nomeCidade1[50];
     int populacao1;
     float areaTerritorio1;
-    float PIB1;
+    float pib1;
     int pontosTuristicos1;
+    float pibPerCap1;
+    float densiPopu1;
 
     // Fluxo de estradas
     printf("Cadastro da Carta 1:\n\n");
@@ -37,9 +39,9 @@ int main(){
     fgets(lixo, sizeof(lixo), stdin);
     sscanf(lixo, "%f", &areaTerritorio1);
 
-    printf("Digite o PIB: ");
+    printf("Digite o pib: ");
     fgets(lixo, sizeof(lixo), stdin);
-    sscanf(lixo, "%f", &PIB1);
+    sscanf(lixo, "%f", &pib1);
 
     printf("Digite a quantia de pontos turisticos: ");
     fgets(lixo, sizeof(lixo), stdin);
@@ -47,6 +49,8 @@ int main(){
 
     // Fluxo logico
     sprintf(idCarta1, "%c01", estado1);
+    densiPopu1 = populacao1 / areaTerritorio1;
+    pibPerCap1 = pib1 / populacao1;
 
     // Fluxo de saida
     printf("\n\nCarta 1:\n");
@@ -55,8 +59,11 @@ int main(){
     printf("Nome da cidade: %s\n", nomeCidade1);
     printf("População: %d\n", populacao1);
     printf("Área: %.2fKm²\n", areaTerritorio1);
-    printf("PIB: %.2f bilhões de reais\n", PIB1);
-    printf("Número de pontos turísticos: %d\n\n\n", pontosTuristicos1);
+    printf("PIB: %.2f bilhões de reais\n", pib1);
+    printf("Número de pontos turísticos: %d\n", pontosTuristicos1);
+    printf("Densidade populacional: %.2f\n", densiPopu1);
+    printf("PIB per capita: %.2f\n\n\n", pibPerCap1);
+    
     
 
 
@@ -68,8 +75,10 @@ int main(){
     char nomeCidade2[50];
     int populacao2;
     float areaTerritorio2;
-    float PIB2;
+    float pib2;
     int pontosTuristicos2;
+    float pibPerCap2;
+    float densiPopu2;
 
     // Fluxo de estradas
     printf("Cadastro da Carta 2:\n\n");
@@ -90,9 +99,9 @@ int main(){
     fgets(lixo, sizeof(lixo), stdin);
     sscanf(lixo, "%f", &areaTerritorio2);
 
-    printf("Digite o PIB: ");
+    printf("Digite o pib: ");
     fgets(lixo, sizeof(lixo), stdin);
-    sscanf(lixo, "%f", &PIB2);
+    sscanf(lixo, "%f", &pib2);
 
     printf("Digite a quantia de pontos turisticos: ");
     fgets(lixo, sizeof(lixo), stdin);
@@ -100,6 +109,8 @@ int main(){
 
     // Fluxo logico
     sprintf(idCarta2, "%c02", estado2);
+    densiPopu2 = populacao2 / areaTerritorio2;
+    pibPerCap2 = pib2 / populacao2;
 
     // Fluxo de saida
     printf("\n\nCarta 2:\n");
@@ -108,8 +119,10 @@ int main(){
     printf("Nome da cidade: %s\n", nomeCidade2);
     printf("População: %d\n", populacao2);
     printf("Área: %.2fKm²\n", areaTerritorio2);
-    printf("PIB: %.2f bilhões de reais\n", PIB2);
-    printf("Número de pontos turísticos: %d\n\n\n", pontosTuristicos2);
+    printf("pib: %.2f bilhões de reais\n", pib2);
+    printf("Número de pontos turísticos: %d\n", pontosTuristicos2);
+    printf("Densidade populacional: %.2f\n", densiPopu2);
+    printf("PIB per capita: %.2f\n\n\n", pibPerCap2);
     
  
     
