@@ -2,25 +2,39 @@
 #include <string.h>
 
 
+int vencedorBool(float carta1, float carta2, int maiorV){
+    if (maiorV){
+        return carta1 > carta2 ? 1 : 0;
+    }else{
+        return carta1 < carta2 ? 1 : 0;
+    }
+
+}
+
+int vencedorCarta(int boolCartaV){
+    return boolCartaV ? 1 : 2 ;
+}
+
+
 int main(){
   
     // Variaveis globais
     char lixo[32];
 
     // Carta 1
-    // Declaração de variaveis
+    // Declarações de variaveis
 
     char estado1;
-    char idCarta1[3];
+    char idCarta1[10];
     char nomeCidade1[50];
-    int populacao1;
+    unsigned long int populacao1;
     float areaTerritorio1;
     float pib1;
     int pontosTuristicos1;
     float pibPerCap1;
     float densiPopu1;
 
-    // Fluxo de estradas
+    // Fluxo de entradas
     printf("Cadastro da Carta 1:\n\n");
 
     printf("Digite o caracter representande do estado [A-H]: ");
@@ -33,7 +47,7 @@ int main(){
 
     printf("Digite o número correspondente a população: ");
     fgets(lixo, sizeof(lixo), stdin);
-    sscanf(lixo, "%d", &populacao1);
+    sscanf(lixo, "%lu", &populacao1);
 
     printf("Digite o tamanho do territorio: ");
     fgets(lixo, sizeof(lixo), stdin);
@@ -57,7 +71,7 @@ int main(){
     printf("Estado: %c\n", estado1);
     printf("Código: %s\n", idCarta1);
     printf("Nome da cidade: %s\n", nomeCidade1);
-    printf("População: %d\n", populacao1);
+    printf("População: %lu\n", populacao1);
     printf("Área: %.2fKm²\n", areaTerritorio1);
     printf("PIB: %.2f bilhões de reais\n", pib1);
     printf("Número de pontos turísticos: %d\n", pontosTuristicos1);
@@ -68,19 +82,19 @@ int main(){
 
 
     // Carta 2
-    // Declaração de variaveis
+    // Declarações de variaveis
 
     char estado2;
-    char idCarta2[3];
+    char idCarta2[10];
     char nomeCidade2[50];
-    int populacao2;
+    unsigned long int populacao2;
     float areaTerritorio2;
     float pib2;
     int pontosTuristicos2;
     float pibPerCap2;
     float densiPopu2;
 
-    // Fluxo de estradas
+    // Fluxo de entradas
     printf("Cadastro da Carta 2:\n\n");
 
     printf("Digite o caracter representande do estado [A-H]: ");
@@ -93,7 +107,7 @@ int main(){
 
     printf("Digite o número correspondente a população: ");
     fgets(lixo, sizeof(lixo), stdin);
-    sscanf(lixo, "%d", &populacao2);
+    sscanf(lixo, "%lu", &populacao2);
 
     printf("Digite o tamanho do territorio: ");
     fgets(lixo, sizeof(lixo), stdin);
@@ -117,7 +131,7 @@ int main(){
     printf("Estado: %c\n", estado2);
     printf("Código: %s\n", idCarta2);
     printf("Nome da cidade: %s\n", nomeCidade2);
-    printf("População: %d\n", populacao2);
+    printf("População: %lu\n", populacao2);
     printf("Área: %.2fKm²\n", areaTerritorio2);
     printf("pib: %.2f bilhões de reais\n", pib2);
     printf("Número de pontos turísticos: %d\n", pontosTuristicos2);
@@ -125,7 +139,51 @@ int main(){
     printf("PIB per capita: %.2f\n\n\n", pibPerCap2);
     
  
+
+
+    // Batalha
+    // Declarações de variaveis
+
+    int cartaV;
+    int boolCartaV;
+    float superPoder1;
+    float superPoder2;
+
+    superPoder1 = populacao1 + areaTerritorio1 + pib1 + pontosTuristicos1 + pibPerCap1 + (1.0 / densiPopu1);
+    superPoder2 = populacao2 + areaTerritorio2 + pib2 + pontosTuristicos2 + pibPerCap2 + (1.0 / densiPopu2);
+
+    // Fluxo de saidas
+    printf("Comparação das cartas:\n");
     
+    boolCartaV = vencedorBool((float)populacao1, (float)populacao2, 1);
+    cartaV = vencedorCarta(boolCartaV);
+    printf("População: Carta %d venceu (%d)\n",  cartaV, boolCartaV);
+    
+    boolCartaV = vencedorBool((float)areaTerritorio1, (float)areaTerritorio2, 1);
+    cartaV = vencedorCarta(boolCartaV);
+    printf("Area: Carta %d venceu (%d)\n", cartaV, boolCartaV);
+    
+    boolCartaV = vencedorBool((float)pib1, (float)pib2, 1);
+    cartaV = vencedorCarta(boolCartaV);
+    printf("PIB: Carta %d venceu (%d)\n", cartaV, boolCartaV);
+    
+    boolCartaV = vencedorBool((float)pontosTuristicos1, (float)pontosTuristicos2, 1);
+    cartaV = vencedorCarta(boolCartaV);
+    printf("Pontos turisticos: Carta %d venceu (%d)\n", cartaV, boolCartaV);
+    
+    boolCartaV = vencedorBool((float)densiPopu1, (float)densiPopu2, 0);
+    cartaV = vencedorCarta(boolCartaV);
+    printf("Densidade Populacional: Carta %d venceu (%d)\n", cartaV, boolCartaV);
+    
+    boolCartaV = vencedorBool((float)pibPerCap1, (float)pibPerCap2, 1);
+    cartaV = vencedorCarta(boolCartaV);
+    printf("PIB per capita: Carta %d venceu (%d)\n", cartaV, boolCartaV);
+    
+    boolCartaV = vencedorBool((float)superPoder1, (float)superPoder2, 1);
+    cartaV = vencedorCarta(boolCartaV);
+    printf("Super poder: Carta %d venceu (%d)\n", cartaV, boolCartaV);
+    
+
     return 0;
 
 }
