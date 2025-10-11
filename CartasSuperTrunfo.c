@@ -2,17 +2,36 @@
 #include <string.h>
 
 
-int vencedorBool(float carta1, float carta2, int maiorV){
-    if (maiorV){
-        return carta1 > carta2 ? 1 : 0;
-    }else{
-        return carta1 < carta2 ? 1 : 0;
-    }
+void mostarCarta(char carta, char estado, char idCarta[], char nomeCidade[], unsigned long int populacao, float areaTerritorio,\
+    float pib, int pontosTuristico, float densidadePopulacional, float pibPerCapita){
 
+    pib /= 1000000000;
+
+    printf("\n\nCarta %d:\n", carta);
+    printf("Estado: %c\n", estado);
+    printf("Código: %s\n", idCarta);
+    printf("Nome da cidade: %s\n", nomeCidade);
+    printf("População: %lu\n", populacao);
+    printf("Área: %.2fKm²\n", areaTerritorio);
+    printf("PIB: %.2f bilhões de reais\n", pib);
+    printf("Número de pontos turísticos: %d\n", pontosTuristico);
+    printf("Densidade populacional: %.2f hab/km²\n", densidadePopulacional);
+    printf("PIB per capita: %.2f reais\n\n\n", pibPerCapita);
 }
 
-int vencedorCarta(int boolCartaV){
-    return boolCartaV ? 1 : 2 ;
+
+void exibirComparacao(float atributo1, float atributo2){
+    printf("Comparação de cartas (Atributo: Territorio):\n");
+    printf("Carta 1 - São Paulo (SP): %.2fkm²\n", atributo1);
+    printf("Carta 2 - Rio de Janeiro (RJ): %.2fkm²\n", atributo2);
+
+    if (atributo1 == atributo2){
+        printf("Resultado: Empatou!\n\n\n");
+    }else if (atributo2 < atributo1){
+        printf("Resultado: Carta 1 (São Paulo) venceu!\n");
+    }else{
+        printf("Resultado: Carta 2 (Rio de Janeiro) venceu!\n");
+    }
 }
 
 
@@ -24,166 +43,50 @@ int main(){
     // Carta 1
     // Declarações de variaveis
 
-    char estado1;
+    int carta1 = 1;
+    char estado1 = 'A';
     char idCarta1[10];
-    char nomeCidade1[50];
-    unsigned long int populacao1;
-    float areaTerritorio1;
-    float pib1;
-    int pontosTuristicos1;
-    float pibPerCap1;
-    float densiPopu1;
-
-    // Fluxo de entradas
-    printf("Cadastro da Carta 1:\n\n");
-
-    printf("Digite o caracter representande do estado [A-H]: ");
-    fgets(lixo, sizeof(lixo), stdin);
-    estado1 = lixo[0];
-
-    printf("Digite o nome da cidade: ");
-    fgets(nomeCidade1, sizeof(nomeCidade1), stdin);
-    nomeCidade1[strcspn(nomeCidade1, "\n")] = '\0';
-
-    printf("Digite o número correspondente a população: ");
-    fgets(lixo, sizeof(lixo), stdin);
-    sscanf(lixo, "%lu", &populacao1);
-
-    printf("Digite o tamanho do territorio: ");
-    fgets(lixo, sizeof(lixo), stdin);
-    sscanf(lixo, "%f", &areaTerritorio1);
-
-    printf("Digite o pib: ");
-    fgets(lixo, sizeof(lixo), stdin);
-    sscanf(lixo, "%f", &pib1);
-
-    printf("Digite a quantia de pontos turisticos: ");
-    fgets(lixo, sizeof(lixo), stdin);
-    sscanf(lixo, "%d", &pontosTuristicos1);
+    char nomeCidade1[50] = "São Paulo";
+    unsigned long int populacao1 = 12325000;
+    float areaTerritorio1 = 1521.11;
+    float pib1 = 699.28 * 1000000000;
+    int pontosTuristico1 = 50;
+    float pibPerCapita1;
+    float densidadePopulacional1;
 
     // Fluxo logico
     sprintf(idCarta1, "%c01", estado1);
-    densiPopu1 = populacao1 / areaTerritorio1;
-    pibPerCap1 = pib1 / populacao1;
+    densidadePopulacional1 = populacao1 / areaTerritorio1;
+    pibPerCapita1 = pib1 / populacao1;
+
 
     // Fluxo de saida
-    printf("\n\nCarta 1:\n");
-    printf("Estado: %c\n", estado1);
-    printf("Código: %s\n", idCarta1);
-    printf("Nome da cidade: %s\n", nomeCidade1);
-    printf("População: %lu\n", populacao1);
-    printf("Área: %.2fKm²\n", areaTerritorio1);
-    printf("PIB: %.2f bilhões de reais\n", pib1);
-    printf("Número de pontos turísticos: %d\n", pontosTuristicos1);
-    printf("Densidade populacional: %.2f\n", densiPopu1);
-    printf("PIB per capita: %.2f\n\n\n", pibPerCap1);
+    mostarCarta(carta1, estado1, idCarta1, nomeCidade1, populacao1, areaTerritorio1, pib1, pontosTuristico1, densidadePopulacional1, pibPerCapita1);
     
-    
-
 
     // Carta 2
     // Declarações de variaveis
 
-    char estado2;
+    int carta2 = 2;
+    char estado2 = 'B';
     char idCarta2[10];
-    char nomeCidade2[50];
-    unsigned long int populacao2;
-    float areaTerritorio2;
-    float pib2;
-    int pontosTuristicos2;
-    float pibPerCap2;
-    float densiPopu2;
-
-    // Fluxo de entradas
-    printf("Cadastro da Carta 2:\n\n");
-
-    printf("Digite o caracter representande do estado [A-H]: ");
-    fgets(lixo, sizeof(lixo), stdin);
-    estado2 = lixo[0];
-
-    printf("Digite o nome da cidade: ");
-    fgets(nomeCidade2, sizeof(nomeCidade2), stdin);
-    nomeCidade2[strcspn(nomeCidade2, "\n")] = '\0';
-
-    printf("Digite o número correspondente a população: ");
-    fgets(lixo, sizeof(lixo), stdin);
-    sscanf(lixo, "%lu", &populacao2);
-
-    printf("Digite o tamanho do territorio: ");
-    fgets(lixo, sizeof(lixo), stdin);
-    sscanf(lixo, "%f", &areaTerritorio2);
-
-    printf("Digite o pib: ");
-    fgets(lixo, sizeof(lixo), stdin);
-    sscanf(lixo, "%f", &pib2);
-
-    printf("Digite a quantia de pontos turisticos: ");
-    fgets(lixo, sizeof(lixo), stdin);
-    sscanf(lixo, "%d", &pontosTuristicos2);
+    char nomeCidade2[50] = "Rio de Janeiro";
+    unsigned long int populacao2 = 6748000;
+    float areaTerritorio2 = 1200.25;
+    float pib2 = 300.5 * 1000000000;
+    int pontosTuristico2 = 30;
+    float pibPerCapita2;
+    float densidadePopulacional2;
 
     // Fluxo logico
     sprintf(idCarta2, "%c02", estado2);
-    densiPopu2 = populacao2 / areaTerritorio2;
-    pibPerCap2 = pib2 / populacao2;
+    densidadePopulacional2 = populacao2 / areaTerritorio2;
+    pibPerCapita2 = pib2 / populacao2;
 
-    // Fluxo de saida
-    printf("\n\nCarta 2:\n");
-    printf("Estado: %c\n", estado2);
-    printf("Código: %s\n", idCarta2);
-    printf("Nome da cidade: %s\n", nomeCidade2);
-    printf("População: %lu\n", populacao2);
-    printf("Área: %.2fKm²\n", areaTerritorio2);
-    printf("pib: %.2f bilhões de reais\n", pib2);
-    printf("Número de pontos turísticos: %d\n", pontosTuristicos2);
-    printf("Densidade populacional: %.2f\n", densiPopu2);
-    printf("PIB per capita: %.2f\n\n\n", pibPerCap2);
-    
- 
-
-
-    // Batalha
-    // Declarações de variaveis
-
-    int cartaV;
-    int boolCartaV;
-    float superPoder1;
-    float superPoder2;
-
-    superPoder1 = populacao1 + areaTerritorio1 + pib1 + pontosTuristicos1 + pibPerCap1 + (1.0 / densiPopu1);
-    superPoder2 = populacao2 + areaTerritorio2 + pib2 + pontosTuristicos2 + pibPerCap2 + (1.0 / densiPopu2);
-
-    // Fluxo de saidas
-    printf("Comparação das cartas:\n");
-    
-    boolCartaV = vencedorBool((float)populacao1, (float)populacao2, 1);
-    cartaV = vencedorCarta(boolCartaV);
-    printf("População: Carta %d venceu (%d)\n",  cartaV, boolCartaV);
-    
-    boolCartaV = vencedorBool((float)areaTerritorio1, (float)areaTerritorio2, 1);
-    cartaV = vencedorCarta(boolCartaV);
-    printf("Area: Carta %d venceu (%d)\n", cartaV, boolCartaV);
-    
-    boolCartaV = vencedorBool((float)pib1, (float)pib2, 1);
-    cartaV = vencedorCarta(boolCartaV);
-    printf("PIB: Carta %d venceu (%d)\n", cartaV, boolCartaV);
-    
-    boolCartaV = vencedorBool((float)pontosTuristicos1, (float)pontosTuristicos2, 1);
-    cartaV = vencedorCarta(boolCartaV);
-    printf("Pontos turisticos: Carta %d venceu (%d)\n", cartaV, boolCartaV);
-    
-    boolCartaV = vencedorBool((float)densiPopu1, (float)densiPopu2, 0);
-    cartaV = vencedorCarta(boolCartaV);
-    printf("Densidade Populacional: Carta %d venceu (%d)\n", cartaV, boolCartaV);
-    
-    boolCartaV = vencedorBool((float)pibPerCap1, (float)pibPerCap2, 1);
-    cartaV = vencedorCarta(boolCartaV);
-    printf("PIB per capita: Carta %d venceu (%d)\n", cartaV, boolCartaV);
-    
-    boolCartaV = vencedorBool((float)superPoder1, (float)superPoder2, 1);
-    cartaV = vencedorCarta(boolCartaV);
-    printf("Super poder: Carta %d venceu (%d)\n", cartaV, boolCartaV);
-    
+    // // Fluxo de saida
+    mostarCarta(carta2, estado2, idCarta2, nomeCidade2, populacao2, areaTerritorio2, pib2, pontosTuristico2, densidadePopulacional2, pibPerCapita2);
+    exibirComparacao(areaTerritorio1, areaTerritorio2);
 
     return 0;
 
-}
+};
