@@ -20,17 +20,55 @@ void mostarCarta(char carta, char estado, char idCarta[], char nomeCidade[], uns
 }
 
 
-void exibirComparacao(float atributo1, float atributo2){
-    printf("Comparação de cartas (Atributo: Territorio):\n");
-    printf("Carta 1 - São Paulo (SP): %.2fkm²\n", atributo1);
-    printf("Carta 2 - Rio de Janeiro (RJ): %.2fkm²\n", atributo2);
+void exibirComparacao( int carta1, int carta2, char nomeCidade1[], char nomeCidade2[], char atributo[], float atributo1, float atributo2, int inverte){
 
-    if (atributo1 == atributo2){
-        printf("Resultado: Empatou!\n\n\n");
-    }else if (atributo2 < atributo1){
-        printf("Resultado: Carta 1 (São Paulo) venceu!\n");
+    if (atributo == "População"){
+        printf("Comparação de cartas (Atributo: %s):\n", atributo);
+        printf("Carta %d - %s (SP): %d\n", carta1, nomeCidade1, (int)atributo1);
+        printf("Carta %d - %s (RJ): %d\n", carta2, nomeCidade2, (int)atributo2);
+
+    }
+    else if (atributo == "Área"){       
+        printf("Comparação de cartas (Atributo: %s):\n", atributo);
+        printf("Carta %d - %s (SP): %.2fkm²\n", carta1, nomeCidade1, atributo1);
+        printf("Carta %d - %s (RJ): %.2fkm²\n", carta2, nomeCidade2, atributo2);
+
+    }
+    else if (atributo == "PIB"){       
+        printf("Comparação de cartas (Atributo: %s):\n", atributo);
+        printf("Carta %d - %s (SP): R$%.2f\n", carta1, nomeCidade1, atributo1/1000000000);
+        printf("Carta %d - %s (RJ): R$%.2f\n", carta2, nomeCidade2, atributo2/1000000000);
+
+    }
+    else if (atributo == "Pontos Turisticos"){       
+        printf("Comparação de cartas (Atributo: %s):\n", atributo);
+        printf("Carta %d - %s (SP): %d\n", carta1, nomeCidade1, (int)atributo1);
+        printf("Carta %d - %s (RJ): %d\n", carta2, nomeCidade2, (int)atributo2);
+
+    }
+    else if (atributo == "Densidade Demografica"){       
+        printf("Comparação de cartas (Atributo: %s):\n", atributo);
+        printf("Carta %d - %s (SP): %.2f hab/km²\n", carta1, nomeCidade1, atributo1);
+        printf("Carta %d - %s (RJ): %.2f hab/km²\n", carta2, nomeCidade2, atributo2);
+
+    }
+    
+    if (inverte == 0){
+        if (atributo1 == atributo2){
+            printf("\nResultado: Empatou!\n");
+        }else if (atributo2 < atributo1){
+            printf("\nResultado: Carta %d (%s) venceu!\n", carta1, nomeCidade1);
+        }else{
+            printf("\nResultado: Carta %d (%s) venceu!\n", carta2, nomeCidade2);
+        }
     }else{
-        printf("Resultado: Carta 2 (Rio de Janeiro) venceu!\n");
+        if (atributo1 == atributo2){
+            printf("\nResultado: Empatou!\n");
+        }else if (atributo2 > atributo1){
+            printf("\nResultado: Carta %d (%s) venceu!\n", carta1, nomeCidade1);
+        }else{
+            printf("\nResultado: Carta %d (%s) venceu!\n", carta2, nomeCidade2);
+        }
     }
 }
 
@@ -40,9 +78,7 @@ int main(){
     // Variaveis globais
     char lixo[32];
 
-    // Carta 1
     // Declarações de variaveis
-
     int carta1 = 1;
     char estado1 = 'A';
     char idCarta1[10];
@@ -53,20 +89,7 @@ int main(){
     int pontosTuristico1 = 50;
     float pibPerCapita1;
     float densidadePopulacional1;
-
-    // Fluxo logico
-    sprintf(idCarta1, "%c01", estado1);
-    densidadePopulacional1 = populacao1 / areaTerritorio1;
-    pibPerCapita1 = pib1 / populacao1;
-
-
-    // Fluxo de saida
-    mostarCarta(carta1, estado1, idCarta1, nomeCidade1, populacao1, areaTerritorio1, pib1, pontosTuristico1, densidadePopulacional1, pibPerCapita1);
     
-
-    // Carta 2
-    // Declarações de variaveis
-
     int carta2 = 2;
     char estado2 = 'B';
     char idCarta2[10];
@@ -77,16 +100,69 @@ int main(){
     int pontosTuristico2 = 30;
     float pibPerCapita2;
     float densidadePopulacional2;
+    
+    int opcao;
+
 
     // Fluxo logico
+    sprintf(idCarta1, "%c01", estado1);
+    densidadePopulacional1 = populacao1 / areaTerritorio1;
+    pibPerCapita1 = pib1 / populacao1;
+    
     sprintf(idCarta2, "%c02", estado2);
     densidadePopulacional2 = populacao2 / areaTerritorio2;
     pibPerCapita2 = pib2 / populacao2;
-
+    
     // // Fluxo de saida
+    mostarCarta(carta1, estado1, idCarta1, nomeCidade1, populacao1, areaTerritorio1, pib1, pontosTuristico1, densidadePopulacional1, pibPerCapita1);
     mostarCarta(carta2, estado2, idCarta2, nomeCidade2, populacao2, areaTerritorio2, pib2, pontosTuristico2, densidadePopulacional2, pibPerCapita2);
-    exibirComparacao(areaTerritorio1, areaTerritorio2);
 
+    densidadePopulacional1 = densidadePopulacional2;
+    populacao1 = populacao2;
+
+    printf("\n\nSelecione uma opção:\n\n");
+    printf("1. Nome da cidade\n");
+    printf("2. População\n");
+    printf("3. Área\n");
+    printf("4. PIB\n");
+    printf("5. Número de pontos turisticos\n");
+    printf("6. Densidade demografica\n\n");
+
+    printf(">>> ");
+    scanf("%d", &opcao);
+    printf("\n");
+    
+    switch(opcao){
+        case 1:
+
+            printf("Comparação de cartas (Atributo: Nome da Cidade):\n");
+            printf("Carta %d - %s (SP)\n", carta1, nomeCidade1);
+            printf("Carta %d - %s (RJ)\n", carta2, nomeCidade2);
+            break;
+        case 2:
+            exibirComparacao(carta1, carta2, nomeCidade1, nomeCidade2, "População", populacao1, populacao2, 0);
+            break;
+        case 3:
+            exibirComparacao(carta1, carta2, nomeCidade1, nomeCidade2, "Área", areaTerritorio1, areaTerritorio2, 0);
+            break;
+        case 4:
+            exibirComparacao(carta1, carta2, nomeCidade1, nomeCidade2, "PIB", pib1, pib2, 0);
+            break;
+        case 5:
+            exibirComparacao(carta1, carta2, nomeCidade1, nomeCidade2, "Pontos Turisticos", pontosTuristico1, pontosTuristico2, 0);
+            break;
+        case 6:
+            exibirComparacao(carta1, carta2, nomeCidade1, nomeCidade2, "Densidade Demografica", densidadePopulacional1, densidadePopulacional2, 1);
+            break;
+        case 7:
+            int condition = 0;
+            break;
+    }
+
+
+
+    // exibirComparacao(carta1, carta2, nomeCidade1, nomeCidade2, areaTerritorio1, areaTerritorio2);
+    
     return 0;
-
+    
 };
